@@ -20,18 +20,15 @@ jobs:
         with:
           go-version: 1.21
       - name: Test
-        id: test
+        env:
+          # GitHub sets this automatically
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: set-test-status
         run: |
           # Run your tests here
           # If tests pass, set tests-status to "success", otherwise set it to "failure"
           if go run gotest.tools/gotestsum@latest --format=testdox ./...; then
-            echo "::set-output name=tests-status::success"
+            echo "tests-status=success" >> $GITHUB_ENV
           else
-            echo "::set-output name=tests-status::failure"
+            echo "tests-status=failure" >> $GITHUB_ENV
           fi
-        env:
-          # GitHub sets this automatically
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set test status
-        run: echo "Test status: ${{ steps.test.outputs.tests-status }}"
