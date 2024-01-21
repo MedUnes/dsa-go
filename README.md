@@ -1,13 +1,13 @@
 # DSA Go
 [![tests](https://github.com/MedUnes/dsa-go/actions/workflows/test.yml/badge.svg)](https://github.com/MedUnes/dsa-go/actions/workflows/test.yml)
 
-* This repo is meant to provide playground for learning DSA (Data Structure & Algorithms) in Go programming language
+* A playground for learning DSA (Data Structure & Algorithms) in Go programming language
 
 # Content
 
 ## Algorithms
 
-### [Sorting](./dsa/sort.go)
+### [Sorting](./pkg/algorithms/sort.go)
 
 1- [Selection Sort](https://en.wikipedia.org/wiki/Selection_sort)
 
