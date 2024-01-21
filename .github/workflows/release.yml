@@ -19,12 +19,11 @@ jobs:
         with:
           go-version: 1.21
 
-      - name: Install goreleaser
-        run: |
-          curl -fsSL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh | sh -s -- -b $GOPATH/bin v0.183.0
-
-      - name: Run goreleaser
-        run: |
-          goreleaser
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v2
+        with:
+          version: latest
+          args: release --rm-dist
         env:
+          # GitHub sets this automatically
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
