@@ -1,4 +1,4 @@
-module github.com/medunes/dsa-go
+module github.com/medunes/dsa-go/latest
 
 go 1.21
 
