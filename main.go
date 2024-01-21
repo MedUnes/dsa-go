@@ -2,14 +2,12 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/medunes/dsa-go/sort"
 )
 
 // You can add arbitrary code here to test the dsa package
 func main() {
 	fmt.Println("DSA Learning in Go. Enjoy!")
-	integerArray := []int{0, 5, -1, 15}
+	/*integerArray := []int{0, 5, -1, 15}
 	sortedIntegerArray := sort.Selection(integerArray)
-	fmt.Println(sortedIntegerArray)
+	fmt.Println(sortedIntegerArray)*/
 }
