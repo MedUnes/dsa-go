@@ -9,26 +9,14 @@ jobs:
   tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Git
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-
-      - name: Delete the old tag
-        run: |
-          git tag -d latest || true
-          git push origin :refs/tags/latest || true
-
-      - name: Tag the latest commit
-        run: |
-          git tag -fa latest -m "Latest commit"
-          git push origin master --tags
+    - uses: actions/checkout@v2
+    - uses: Klemensas/action-autotag@stable
+      with:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        version: "latest"
   release:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
