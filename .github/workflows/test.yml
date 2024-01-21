@@ -5,6 +5,8 @@ on:
       - master
 jobs:
   test:
+    outputs:
+      tests-status: ${{ steps.tests-status.outputs.tests-status }}
     runs-on: ubuntu-latest
     steps:
       -
@@ -17,9 +19,19 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.21
-      -
-        name: Test
-        run: go run gotest.tools/gotestsum@latest --format=testdox ./...
+      - name: Test
+        id: test
+        run: |
+          # Run your tests here
+          # If tests pass, set tests-status to "success", otherwise set it to "failure"
+          if go run gotest.tools/gotestsum@latest --format=testdox ./...; then
+            echo "::set-output name=tests-status::success"
+          else
+            echo "::set-output name=tests-status::failure"
+          fi
         env:
           # GitHub sets this automatically
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set test status
+        run: echo "Test status: ${{ steps.test.outputs.tests-status }}"
