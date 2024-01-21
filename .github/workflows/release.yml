@@ -1,32 +1,31 @@
-name: release
+name: Release
 
 on:
-  push:
-    branches:
-      - master
+  workflow_run:
+    workflows: ["Test"]
+    types:
+      - completed
+
 jobs:
-  goreleaser:
+  release:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+
     steps:
-      -
-        name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      -
-        name: Fetch all tags
-        run: git fetch --force --tags
-      -
-        name: Set up Go
+
+      - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.21
-      -
-        name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v2
-        with:
-          version: latest
-          args: release --rm-dist
+          go-version: 1.1.21
+
+      - name: Install goreleaser
+        run: |
+          curl -fsSL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh | sh -s -- -b $GOPATH/bin v0.183.0
+
+      - name: Run goreleaser
+        run: |
+          goreleaser
         env:
-          # GitHub sets this automatically
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,4 +1,5 @@
 builds:
+  main: ./build/dsa-go
 - env:
     # goreleaser does not work with CGO, it could also complicate
     # usage by users in CI/CD systems like Terraform Cloud where
@@ -14,11 +15,11 @@ builds:
     - goos: darwin
 changelog:
   use: github
+
+project_name: dsa-go
 release:
   github:
     owner: medunes
     name: dsa-go
     # Use a custom tag format that is synchronized with master.
     tag_template: "master-{{ .Commit }}"
-build:
-  main: ./bin/dsa-go
