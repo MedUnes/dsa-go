@@ -13,7 +13,8 @@ jobs:
     - uses: Klemensas/action-autotag@stable
       with:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        version: "latest"
+        version: "${{ steps.previous_step.outputs.version }}"
+    
   release:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
