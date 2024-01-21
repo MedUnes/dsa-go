@@ -2,10 +2,9 @@ name: Release
 
 on:
   workflow_run:
-    workflows: ["test"]
+    workflows: ["Tests"]
     types:
       - completed
-
 jobs:
   release:
     if: github.event.workflow_run.conclusion == 'success'
