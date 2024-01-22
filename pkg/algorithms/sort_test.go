@@ -1,9 +1,7 @@
 package sort
 
 import (
-	"math/rand"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -59,20 +57,16 @@ var testData = &TestData{
 	},
 }
 
-func generateLargeArray() []int {
-	var size = 10000    // Size of the array, adjust as needed
-	var maxRange = 1000 // Maximum range for random integers
+func TestBubble(t *testing.T) {
 
-	rand.Seed(time.Now().UnixNano()) // Seed for random number generator
+	for testCase, array := range testData.ArrayList {
+		t.Run(testCase, func(t *testing.T) {
+			actual := Bubble(array)
+			assert.ElementsMatch(t, actual, testData.ExpectedList[testCase])
+		})
 
-	array := make([]int, size)
-	for i := range array {
-		array[i] = rand.Intn(maxRange) - (maxRange / 2) // Generates numbers in the range [-maxRange/2, maxRange/2]
 	}
-
-	return array
 }
-
 func TestSelection(t *testing.T) {
 
 	for testCase, array := range testData.ArrayList {
