@@ -89,3 +89,14 @@ func TestInsertion(t *testing.T) {
 	}
 
 }
+func TestQuickLomuto(t *testing.T) {
+
+	for testCase, array := range testData.ArrayList {
+		t.Run(testCase, func(t *testing.T) {
+			actual := QuickLomuto(array, 0, len(array)-1)
+			assert.ElementsMatch(t, actual, testData.ExpectedList[testCase])
+		})
+
+	}
+
+}
