@@ -16,6 +16,8 @@
 
 3- [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
 
+4- [Quick Sort / Lomuto](https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme)
+
 
 ## Running The tests
 ```bash
