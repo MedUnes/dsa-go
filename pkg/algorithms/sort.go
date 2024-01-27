@@ -50,7 +50,7 @@ func QuickLomuto(array []int, lo, hi int) []int {
 
 		return array
 	}
-	array, p := partition(array, lo, hi)
+	array, p := partitionLomuto(array, lo, hi)
 	array = QuickLomuto(array, lo, p-1)
 	array = QuickLomuto(array, p+1, hi)
 
@@ -58,7 +58,7 @@ func QuickLomuto(array []int, lo, hi int) []int {
 
 }
 
-func partition(array []int, lo, hi int) ([]int, int) {
+func partitionLomuto(array []int, lo, hi int) ([]int, int) {
 
 	i := lo - 1
 	pivot := array[lo]
@@ -72,4 +72,29 @@ func partition(array []int, lo, hi int) ([]int, int) {
 	array[i], array[hi] = array[hi], array[i]
 
 	return array, i
+}
+
+/**
+ * This is an easier and more educational implementation of the QuickSort algorithm
+ * Obviously less space-effecient (not in-place)
+ */
+func QuickSimple(array []int) []int {
+
+	if len(array) <= 1 {
+
+		return array
+	}
+	var lower, higher, center []int
+	pivot := array[0]
+	center = append(center, pivot)
+	for _, element := range array[1:] {
+		if element <= pivot {
+			lower = append(lower, element)
+			continue
+		}
+		higher = append(higher, element)
+	}
+	sortedArray := append(QuickSimple(lower), center...)
+	sortedArray = append(sortedArray, QuickSimple(higher)...)
+	return sortedArray
 }

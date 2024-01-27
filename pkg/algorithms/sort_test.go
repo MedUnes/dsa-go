@@ -20,6 +20,8 @@ var testData = &TestData{
 	ArrayList: map[string][]int{
 		"empty":                            {},
 		"oneElement":                       {0},
+		"twoElementsSorted":                {5, 144},
+		"twoElementsUnsorted":              {10, -7},
 		"moreThanOneElement":               {1, 3, 4, 2},
 		"moreThanOneElementWithRepetition": {1, 4, 4, 2},
 		"moreThanOneElement2":              {7, 7, 1, 0, 99, -5, 10},
@@ -39,6 +41,8 @@ var testData = &TestData{
 	ExpectedList: map[string][]int{
 		"empty":                            {},
 		"oneElement":                       {0},
+		"twoElementsSorted":                {5, 144},
+		"twoElementsUnsorted":              {-7, 10},
 		"moreThanOneElement":               {1, 2, 3, 4},
 		"moreThanOneElementWithRepetition": {1, 2, 4, 4},
 		"moreThanOneElement2":              {-5, 0, 1, 7, 7, 10, 99},
@@ -94,6 +98,17 @@ func TestQuickLomuto(t *testing.T) {
 	for testCase, array := range testData.ArrayList {
 		t.Run(testCase, func(t *testing.T) {
 			actual := QuickLomuto(array, 0, len(array)-1)
+			assert.ElementsMatch(t, actual, testData.ExpectedList[testCase])
+		})
+
+	}
+
+}
+func TestQuickSimple(t *testing.T) {
+
+	for testCase, array := range testData.ArrayList {
+		t.Run(testCase, func(t *testing.T) {
+			actual := QuickSimple(array)
 			assert.ElementsMatch(t, actual, testData.ExpectedList[testCase])
 		})
 
