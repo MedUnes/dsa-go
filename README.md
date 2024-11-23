@@ -1,6 +1,5 @@
 # DSA Go
 [![tests](https://github.com/MedUnes/dsa-go/actions/workflows/tests.yml/badge.svg)](https://github.com/MedUnes/dsa-go/actions/workflows/tests.yml)
-[![Release](https://github.com/MedUnes/dsa-go/actions/workflows/release.yml/badge.svg)](https://github.com/MedUnes/dsa-go/actions/workflows/release.yml)
 
 * A playground for learning DSA (Data Structure & Algorithms) in Go programming language
 
